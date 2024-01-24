@@ -136,7 +136,8 @@ where
                                 HttpResponse::Forbidden().finish().map_into_right_body(),
                             ))
                         }
-                        Err(_) => {
+                        Err(err) => {
+                            eprintln!("140 {err:?}");
                             drop(lock);
                             Ok(req.into_response(
                                 HttpResponse::BadGateway().finish().map_into_right_body(),
@@ -156,7 +157,8 @@ where
                                 HttpResponse::Forbidden().finish().map_into_right_body(),
                             ))
                         }
-                        Err(_) => {
+                        Err(err) => {
+                            eprintln!("161 {err:?}");
                             drop(lock);
                             Ok(req.into_response(
                                 HttpResponse::BadGateway().finish().map_into_right_body(),
