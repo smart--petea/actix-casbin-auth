@@ -125,6 +125,7 @@ where
             if !vals.subject.is_empty() {
                 if let Some(domain) = vals.domain {
                     let mut lock = cloned_enforcer.write().await;
+                    eprintln!("{subject:?}{domain:?}{path:?}{action:?}");
                     match lock.enforce_mut(vec![subject, domain, path, action]) {
                         Ok(true) => {
                             drop(lock);
