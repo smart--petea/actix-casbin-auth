@@ -121,6 +121,7 @@ where
                 }
             };
             let subject = vals.subject.clone();
+            eprintln!("124{subject:?}");
 
             if !vals.subject.is_empty() {
                 if let Some(domain) = vals.domain {
