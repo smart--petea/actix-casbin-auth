@@ -148,7 +148,7 @@ where
                     }
                 } else {
                     let mut lock = cloned_enforcer.write().await;
-                    match lock.enforce_mut(vec![subject, path, action]) {
+                    match lock.enforce_mut(vec![subject.clone(), path.clone(), action.clone()]) {
                         Ok(true) => {
                             drop(lock);
                             srv.call(req).await.map(|res| res.map_into_left_body())
@@ -160,7 +160,7 @@ where
                             ))
                         }
                         Err(err) => {
-                            eprintln!("161 {err:?}");
+                            eprintln!("161 {err:?} {subject:?} {path:?} {action:?}");
                             drop(lock);
                             Ok(req.into_response(
                                 HttpResponse::BadGateway().finish().map_into_right_body(),
